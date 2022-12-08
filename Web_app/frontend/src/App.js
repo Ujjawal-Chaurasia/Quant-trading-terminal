@@ -1,14 +1,15 @@
-import Welcomepage from "./pages/Welcomepage";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import React, { Suspense } from "react";
+import { BrowserRouter } from "react-router-dom";
+import Routing from "./routes";
 
 function App() {
   return (
     <div className="App">
-      <Welcomepage />
-      {/* <Signup/> */}
-      {/* <Welcomepage/>  */}
-      <Login />
+      <BrowserRouter>
+        <Suspense fallback={<p>loading....</p>}>
+          <Routing />
+        </Suspense>
+      </BrowserRouter>
     </div>
   );
 }
