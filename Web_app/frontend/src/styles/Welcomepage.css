@@ -2,20 +2,21 @@
 
     background-image: url(https://images.unsplash.com/photo-1521114978264-2223e08aa0d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80);
     background-size: cover;
+    height: 100vh;
 }
 
 #logo{
 
 position: absolute;
-width:90px;
-left:40px;
-top:12px;
+width:9rem;
+left:4rem;
+top:1.2rem;
 
 font-family: 'Inter';
 font-style: normal;
 font-weight: 800;
-font-size: 40px;
-line-height: 48px;
+font-size: 4rem;
+line-height: 4rem;
 
 color: #0098FB;
 }
@@ -29,15 +30,15 @@ a{
    font-family: 'Serif-sans';
 font-style: normal;
 font-weight: 400;
-font-size: 40px;
-line-height: 48px;
+font-size: 2rem;
+line-height: 4rem;
 
 color: #e8ecee; 
    
 }
 #contents{
     background-color: azure;
-    height: 70vh;
+    height: 75vh;
     margin: 5rem 5rem 10rem 5rem;
     opacity: 0.90;
     border-radius: 4rem;
@@ -55,7 +56,7 @@ color: #e8ecee;
     
     
     width: 150vw;
-    border-radius: 20px;
+    border-radius: 20rem;
     background-size: cover;
     background-image: url(https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1415&q=80);
 }
@@ -66,8 +67,8 @@ opacity: 1;
 font-family: 'Times-new-Roman';
 font-style: normal;
 font-weight: 800;
-font-size: 40px;
-line-height: 48px;
+font-size: 4rem;
+line-height: 4rem;
 
 color: #0a9be4;
 }   
@@ -77,21 +78,21 @@ color: #0a9be4;
    font-family: 'Serif-sans';
 font-style: normal;
 font-weight: 400;
-font-size: 40px;
-line-height: 48px;
+font-size: 1.5rem;
+line-height: 4rem;
 
 color: #000406; 
    
 }
 #button{
     position: relative;
-    left: 12px;
-width: 100px;
-height: 50px;
-padding: 2rem;
+    height: 10rem;
+    width: 15rem;
+    left: 1.2rem;
+text-align: center;
 font-size: x-large;
-font: larger;
+font: 2rem;
 
 background: #0098FB;
-border-radius: 10px;
+border-radius: 10rem;
 }

@@ -1,0 +1,76 @@
+nav{
+    width: 100vw;
+    height: 15vh;
+    align-items: center;
+    background-color: aqua;
+}
+nav input{
+    background-color: aliceblue;
+    margin-left: 20vw;
+    width: 60vw;
+    margin-top: 3rem;
+    height: 3rem;
+    border-radius: 6rem;
+}
+
+.dataandnews{
+    width:30vw;
+    padding: 3rem;
+    display: block;
+}
+
+.data
+{
+    background-color: black;
+    border-radius: 1rem;
+    color: aliceblue;    
+    display: flex;
+    flex-direction: column;
+}
+.data p{
+    padding: 0.5rem;
+    margin-left: 2rem;
+}
+.assetname{
+    font-weight: 1000;
+    font-size: 3rem;
+
+}
+.price{
+    font-size: 2rem;
+
+}
+.change{
+    color: green;
+    font-size: 2rem;
+}
+.priceandchange{
+    display: flex;
+}
+.recentnews{
+    font-size: 2rem;
+}
+.news{
+    background-color: rgb(151, 149, 149);
+    border-radius: 1rem;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+}
+.newsheading{
+    padding: 1rem;
+    font-weight: 700;
+}
+.newscontent{
+    padding: 1rem;
+}
+.content{
+    display: flex;
+}
+.chartandmetrics{
+    
+    
+}
+.portfolio{
+    padding: 8rem;
+}
