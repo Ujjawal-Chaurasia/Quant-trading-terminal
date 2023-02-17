@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
+
 import Routing from "./routes";
 
 function App() {
@@ -12,6 +13,5 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
-
+};
 export default App;

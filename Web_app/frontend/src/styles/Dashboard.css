@@ -74,3 +74,15 @@ nav input{
 .portfolio{
     padding: 8rem;
 }
+
+.keymetrics{
+    margin-left: 40rem;
+}
+.metrics{
+    display: flex;
+    padding: 2rem;
+    
+}
+.metrics h2{
+    padding: 2rem;
+}

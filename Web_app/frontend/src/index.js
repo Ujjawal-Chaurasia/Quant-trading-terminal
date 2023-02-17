@@ -6,10 +6,13 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import Newdashboard from './pages/Newdashboard'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
+  
   </React.StrictMode>
 );
 

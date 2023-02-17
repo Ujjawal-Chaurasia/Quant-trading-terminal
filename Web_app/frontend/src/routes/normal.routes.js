@@ -8,7 +8,7 @@ const normalRoutes = [
     path: '/',
   },
   {
-    element: <Dashboard/>,
+    element: <Dashboard />,
     path:'/dashboard',
   }
 ];

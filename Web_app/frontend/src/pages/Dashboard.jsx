@@ -1,9 +1,23 @@
 import React from 'react'
 import '../styles/Dashboard.css'
 import GoogleChart from '../components/chart';
+import { useEffect } from 'react';
+
+var fetchdata = (symbol) =>{
+fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`)}`)
+.then(response => {
+	if (response.ok) return response.json()
+	throw new Error('Network response was not ok.')
+})
+.then(data => console.log(JSON.parse(data.contents).chart.result[0].indicators.quote));  
+}
+
+
 
 const Dashboard = () => {
-  
+  useEffect(()=>{
+    fetchdata("googl");
+  },[])
   return (
     <div className="dashboard">
       <nav>
@@ -45,6 +59,14 @@ const Dashboard = () => {
  <GoogleChart/>
 
     </div>
+     </div>
+     <div className="keymetrics">
+      <h1>Key Metrics</h1>
+      <div className="metrics">
+        <h2>metric 1</h2>
+        <h2>metric 2</h2>
+        <h2>metric 3</h2>
+      </div>
      </div>
     </div>
   )
