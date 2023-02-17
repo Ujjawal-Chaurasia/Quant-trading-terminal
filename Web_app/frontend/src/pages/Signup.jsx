@@ -7,7 +7,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 import {
   MDBBtn,
   MDBContainer,
@@ -96,12 +96,14 @@ function App() {
       <MDBCard className="text-black m-4" style={{ borderRadius: "50px" }}>
         <MDBCardBody>
           <MDBRow>
-            <h3
-              style={{ color: "black", textDecoration: "underline" }}
-              className="text-center fw-bold mt-1 mb-5 pb-1"
-            >
-              QUANT TRADING TERMINAL
-            </h3>
+            <Link to="/">
+              <h3
+                style={{ color: "black", textDecoration: "underline" }}
+                className="text-center fw-bold mt-1 mb-5 pb-1"
+              >
+                QUANT TRADING TERMINAL
+              </h3>
+            </Link>
 
             <MDBCol
               md="10"

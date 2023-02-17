@@ -94,12 +94,14 @@ function App() {
         <MDBCard className="text-black m-5" style={{ borderRadius: "50px" }}>
           <MDBCardBody>
             <MDBRow>
-              <h3
-                style={{ color: "black", textDecoration: "underline" }}
-                className="text-center fw-bold mt-1 mb-5 pb-1"
-              >
-                QUANT TRADING TERMINAL
-              </h3>
+              <Link to="/">
+                <h3
+                  style={{ color: "black", textDecoration: "underline" }}
+                  className="text-center fw-bold mt-1 mb-5 pb-1"
+                >
+                  QUANT TRADING TERMINAL
+                </h3>
+              </Link>
 
               <MDBCol
                 md="10"

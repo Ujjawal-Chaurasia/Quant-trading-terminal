@@ -37,7 +37,7 @@ const Welcomepage = () => {
           </div>
 
           <Link to="/login">
-            <MDBBtn id="button"> Get Started</MDBBtn>
+            <MDBBtn size="lg" id="button"> Get Started</MDBBtn>
           </Link>
         </div>
         <div id="right"></div>
