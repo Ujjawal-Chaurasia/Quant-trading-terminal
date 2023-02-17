@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import "../styles/Signup.css";
 import { auth, provider } from "../firebase";
 import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-
+import { Link } from "react-router-dom";
 import {
   MDBBtn,
   MDBContainer,
@@ -26,7 +27,7 @@ function App() {
     password: "",
   });
 
-  const handleSignUp = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prev) => ({
       ...prev,
@@ -79,67 +80,74 @@ function App() {
     <form onSubmit={handleSubmit}>
       <MDBContainer fluid>
         {/* {JSON.stringify(userData)} */}
-        <MDBCard className="text-black m-5" style={{ borderRadius: "50px" }}>
+        <MDBCard className="text-black m-4" style={{ borderRadius: "50px" }}>
           <MDBCardBody>
             <MDBRow>
+              <h3
+                style={{ color: "black", textDecoration: "underline" }}
+                className="text-center fw-bold mt-1 mb-5 pb-1"
+              >
+                QUANT TRADING TERMINAL
+              </h3>
+
               <MDBCol
                 md="10"
                 lg="6"
                 className="order-2 order-lg-1 d-flex flex-column align-items-center"
               >
-                <div className="text-center">
-                  <img
-                    src="https://thumbs.dreamstime.com/z/business-trading-logo-vector-design-171734765.jpg"
-                    style={{ width: "250px" }}
-                    alt="logo"
-                  />
-                  <h4 className="mt-1 mb-5 pb-1">QUANT TRADING TERMINAL</h4>
-                  <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                    Sign up
-                  </p>
+                <div className="">
+                  <p className=" h3 fw-bold mb-3 mx-1 mx-md-4 mt-2">Sign up</p>
                 </div>
 
-                <div className="d-flex flex-row align-items-center mb-4 ">
-                  <MDBIcon fas icon="user me-3" size="lg" />
-                  <MDBInput
-                    name="name"
-                    onChange={handleSignUp}
-                    label="Your Name"
-                    id="form1"
-                    type="text"
-                    className="w-100"
-                  />
-                </div>
+                <div
+                  className="d-flex flex-column align-items-center justify-content-center"
+                  style={{ width: "100%" }}
+                >
+                  <div className="d-flex flex-row align-items-center mb-4 ">
+                    <MDBIcon fas icon="user me-3" size="lg" />
+                    <MDBInput
+                      name="name"
+                      onChange={handleChange}
+                      label="Your Name"
+                      id="form1"
+                      type="text"
+                      style={{ width: "350px" }}
+                    />
+                  </div>
 
-                <div className="d-flex flex-row align-items-center mb-4">
-                  <MDBIcon fas icon="envelope me-3" size="lg" />
-                  <MDBInput
-                    onChange={handleSignUp}
-                    name="email"
-                    label="Your Email"
-                    id="form2"
-                    type="email"
-                  />
-                </div>
+                  <div className="d-flex flex-row align-items-center mb-4">
+                    <MDBIcon fas icon="envelope me-3" size="lg" />
+                    <MDBInput
+                      onChange={handleChange}
+                      name="email"
+                      label="Your Email"
+                      id="form2"
+                      type="email"
+                      style={{ width: "350px" }}
+                    />
+                  </div>
 
-                <div className="d-flex flex-row align-items-center mb-4">
-                  <MDBIcon fas icon="lock me-3" size="lg" />
-                  <MDBInput
-                    onChange={handleSignUp}
-                    name="password"
-                    label="Password"
-                    id="form3"
-                    type="password"
-                  />
-                </div>
+                  <div className="d-flex flex-row align-items-center mb-4">
+                    <MDBIcon fas icon="lock me-3" size="lg" />
+                    <MDBInput
+                      onChange={handleChange}
+                      name="password"
+                      label="Password"
+                      id="form3"
+                      type="password"
+                      style={{ width: "350px" }}
+                    />
+                  </div>
 
-                <div className="d-flex flex-row align-items-center mb-4">
-                  <MDBIcon fas icon="key me-3" size="lg" />
-                  <MDBInput
-                    label="Repeat your password"
-                    id="form4"
-                    type="password"
-                  />
+                  <div className="d-flex flex-row align-items-center mb-4">
+                    <MDBIcon fas icon="key me-3" size="lg" />
+                    <MDBInput
+                      label="Repeat your password"
+                      id="form4"
+                      type="password"
+                      style={{ width: "350px" }}
+                    />
+                  </div>
                 </div>
 
                 <div className="mb-4">
@@ -151,9 +159,51 @@ function App() {
                   />
                 </div>
 
-                <MDBBtn type="submit" className="mb-4" size="lg">
-                  Register
-                </MDBBtn>
+                <div className="register-text">
+                  <div>
+                    <MDBBtn
+                      outline
+                      color="secondary"
+                      type="submit"
+                      className="mb-3"
+                      size="lg"
+                    >
+                      Register
+                    </MDBBtn>
+                  </div>
+                  <div>
+                    <p>
+                      <Link to="/login">
+                        <span className="me-1 fw-normal">sign in</span>
+                      </Link>
+                      Instead?
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{ width: "60%" }}>
+                  <div className="awesome-divider"></div>
+                </div>
+
+                <div className="sso">
+                  <MDBBtn
+                    style={{ backgroundColor: "#dd4b39" }}
+                    className="mb-3"
+                    size="lg"
+                  >
+                    <MDBIcon className="me-2" fab icon="google" />
+                    Google Sign Up
+                  </MDBBtn>
+
+                  <MDBBtn
+                    className="mb-3"
+                    style={{ backgroundColor: "#333333" }}
+                    size="lg"
+                  >
+                    <MDBIcon className="me-2" fab icon="github" />
+                    Github Sign Up
+                  </MDBBtn>
+                </div>
               </MDBCol>
 
               <MDBCol

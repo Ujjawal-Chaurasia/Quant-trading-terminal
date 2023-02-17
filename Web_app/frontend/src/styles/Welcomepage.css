@@ -39,17 +39,6 @@
   padding-right: 5px;
   padding-left: 5px;
 }
-a {
-  padding: 2rem;
-  font-size: large;
-  font-family: "Serif-sans";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 35px;
-  line-height: 48px;
-
-  color: black;
-}
 #contents {
   background-color: azure;
   height: 70vh;
