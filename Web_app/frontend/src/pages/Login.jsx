@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
-import "../styles/Login.css"
+import "../styles/Login.css";
+import { ToastContainer, toast } from "react-toastify";
 import {
   MDBBtn,
   MDBContainer,
@@ -12,12 +12,18 @@ import {
   MDBInput,
   MDBIcon,
 } from "mdb-react-ui-kit";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import auth from "../firebase";
-import { Link } from "react-router-dom";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { auth, provider } from "../firebase";
 
+import { Link, useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -27,20 +33,52 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    signInWithEmailAndPassword(auth, userData.email, userData.password)
+    signInWithEmailAndPassword(getAuth(), userData.email, userData.password)
       .then((userCredential) => {
-        console.log(userCredential);
         // Signed in
         const user = userCredential.user;
+        navigate("/dashboard");
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error);
+        toast.error(errorMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       });
   };
 
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prev) => ({
@@ -50,7 +88,7 @@ function App() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="login-page">
       <MDBContainer fluid>
         {/* {JSON.stringify(userData)} */}
         <MDBCard className="text-black m-5" style={{ borderRadius: "50px" }}>
@@ -109,6 +147,7 @@ function App() {
                       type="submit"
                       className="mb-3 ms-4"
                       size="lg"
+                      onClick={handleSubmit}
                     >
                       Log In
                     </MDBBtn>
@@ -132,6 +171,8 @@ function App() {
                     style={{ backgroundColor: "#dd4b39" }}
                     className="mb-3"
                     size="lg"
+                    onClick={handleGoogleSignIn}
+                    type="text"
                   >
                     <MDBIcon className="me-2" fab icon="google" />
                     Google Sign In
@@ -162,7 +203,7 @@ function App() {
           </MDBCardBody>
         </MDBCard>
       </MDBContainer>
-    </form>
+    </div>
   );
 }
 
