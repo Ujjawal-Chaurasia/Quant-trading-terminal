@@ -1,16 +1,29 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import "../styles/Login.css";
+import { ToastContainer, toast } from "react-toastify";
 import {
   MDBBtn,
   MDBContainer,
   MDBRow,
   MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
   MDBInput,
+  MDBIcon,
 } from "mdb-react-ui-kit";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import auth from "../firebase";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { auth, provider } from "../firebase";
+
+import { Link, useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -20,20 +33,52 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    signInWithEmailAndPassword(auth, userData.email, userData.password)
+    signInWithEmailAndPassword(getAuth(), userData.email, userData.password)
       .then((userCredential) => {
-        console.log(userCredential)
         // Signed in
         const user = userCredential.user;
+        navigate("/dashboard");
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error)
+        toast.error(errorMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       });
   };
 
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prev) => ({
@@ -43,78 +88,124 @@ function App() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <MDBContainer className="my-5 gradient-form">
-        <MDBRow>
-          <MDBCol col="6" className="mb-5">
-            <div className="d-flex flex-column ms-5">
-              <div className="text-center">
-                <img
-                  src="https://thumbs.dreamstime.com/z/business-trading-logo-vector-design-171734765.jpg"
-                  style={{ width: "285px" }}
-                  alt="logo"
+    <div className="login-page">
+      <MDBContainer fluid>
+        {/* {JSON.stringify(userData)} */}
+        <MDBCard className="text-black m-5" style={{ borderRadius: "50px" }}>
+          <MDBCardBody>
+            <MDBRow>
+              <Link to="/">
+                <h3
+                  style={{ color: "black", textDecoration: "underline" }}
+                  className="text-center fw-bold mt-1 mb-5 pb-1"
+                >
+                  QUANT TRADING TERMINAL
+                </h3>
+              </Link>
+
+              <MDBCol
+                md="10"
+                lg="6"
+                className="order-2 order-lg-1 d-flex flex-column align-items-center"
+              >
+                <div className="">
+                  <p className=" h3 fw-bold mb-5 mx-1 mx-md-4 mt-2">Sign In</p>
+                </div>
+
+                <div
+                  className="d-flex flex-column align-items-center justify-content-center"
+                  style={{ width: "100%" }}
+                >
+                  <div className="d-flex flex-row align-items-center mb-4">
+                    <MDBIcon fas icon="envelope me-3" size="lg" />
+                    <MDBInput
+                      onChange={handleChange}
+                      name="email"
+                      label="Your Email"
+                      id="form2"
+                      type="email"
+                      style={{ width: "350px" }}
+                    />
+                  </div>
+
+                  <div className="d-flex flex-row align-items-center mb-4">
+                    <MDBIcon fas icon="lock me-3" size="lg" />
+                    <MDBInput
+                      onChange={handleChange}
+                      name="password"
+                      label="Password"
+                      id="form3"
+                      type="password"
+                      style={{ width: "350px" }}
+                    />
+                  </div>
+                </div>
+
+                <div className="register-text mt-3">
+                  <div>
+                    <MDBBtn
+                      outline
+                      color="secondary"
+                      type="submit"
+                      className="mb-3 ms-4"
+                      size="lg"
+                      onClick={handleSubmit}
+                    >
+                      Log In
+                    </MDBBtn>
+                  </div>
+                  <div>
+                    <p>
+                      <Link to="/register">
+                        <span className="me-1 fw-normal">create account</span>
+                      </Link>
+                      Instead?
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{ width: "60%" }}>
+                  <div className="awesome-divider mt-4"></div>
+                </div>
+
+                <div className="sso mt-3">
+                  <MDBBtn
+                    style={{ backgroundColor: "#dd4b39" }}
+                    className="mb-3"
+                    size="lg"
+                    onClick={handleGoogleSignIn}
+                    type="text"
+                  >
+                    <MDBIcon className="me-2" fab icon="google" />
+                    Google Sign In
+                  </MDBBtn>
+
+                  <MDBBtn
+                    className="mb-3"
+                    style={{ backgroundColor: "#333333" }}
+                    size="lg"
+                  >
+                    <MDBIcon className="me-2" fab icon="github" />
+                    Github Sign In
+                  </MDBBtn>
+                </div>
+              </MDBCol>
+
+              <MDBCol
+                md="10"
+                lg="6"
+                className="order-1 order-lg-2 d-flex align-items-center"
+              >
+                <MDBCardImage
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  fluid
                 />
-                <h4 className="mt-1 mb-5 pb-1">QUANT TRADING TERMINAL</h4>
-              </div>
-
-              <p>Please login to your account</p>
-
-              <MDBInput
-                wrapperClass="mb-4"
-                label="Email address"
-                id="form1"
-                type="email"
-                name="email"
-                onChange={handleChange}
-              />
-              <MDBInput
-                wrapperClass="mb-4"
-                label="Password"
-                id="form2"
-                type="password"
-                name="password"
-                onChange={handleChange}
-              />
-
-              <div className="text-center pt-1 mb-5 pb-1">
-                <MDBBtn className="mb-4 w-100 gradient-custom-2">
-                  Sign in
-                </MDBBtn>
-                <a className="text-muted" href="#!">
-                  Forgot password?
-                </a>
-              </div>
-
-              <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
-                <p className="mb-0">Don't have an account?</p>
-                <MDBBtn outline className="mx-2" color="danger">
-                  Register
-                </MDBBtn>
-              </div>
-            </div>
-          </MDBCol>
-
-          <MDBCol col="6" className="mb-5">
-            <div className="d-flex flex-column  justify-content-center gradient-custom-2 h-100 mb-4">
-              <img
-                src="https://as2.ftcdn.net/v2/jpg/04/60/71/01/1000_F_460710131_YkD6NsivdyYsHupNvO3Y8MPEwxTAhORh.jpg"
-                style={{ height: "750px", width: "700px" }}
-                alt="logo"
-              />
-              <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 className="mb-4">We are more than just a company</h4>
-                <p className="small mb-0">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-              </div>
-            </div>
-          </MDBCol>
-        </MDBRow>
+              </MDBCol>
+            </MDBRow>
+          </MDBCardBody>
+        </MDBCard>
       </MDBContainer>
-    </form>
+    </div>
   );
 }
 

@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 const Welcomepage = () => {
   return (
     <div id="page">
-      <div id="header">
-        <div id="logo">
+      <div className="d-flex">
+        <div className="ms-5" id="logo">
           <a>Quanta</a>
         </div>
 
-        <div id="links">
+        <div className="mt-4" id="links">
           <Link>
             <h4 style={{ color: "white", fontWeight: 700 }}>Home</h4>
           </Link>
@@ -37,7 +37,7 @@ const Welcomepage = () => {
           </div>
 
           <Link to="/login">
-            <MDBBtn id="button"> Get Started</MDBBtn>
+            <MDBBtn size="lg" id="button"> Get Started</MDBBtn>
           </Link>
         </div>
         <div id="right"></div>

@@ -1,49 +1,48 @@
 import React, { Component } from "react";
 import Chart from "react-google-charts";
-
-var fetchdata = (symbol) =>{
-  fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}`)}`)
-  .then(response => {
-    if (response.ok) return response.json()
-    throw new Error('Network response was not ok.')
-  })
-  .then(data => {return(JSON.parse(data.contents).chart.result[0].indicators.quote)});  
-  }
-
-var data = fetchdata("googl")
-console.log(data);
-const datachart = [
-  
-];
-
-
-
-
-
-
+import { Spinner } from "../spinner";
 
 class GoogleChart extends Component {
-  
   constructor(props) {
-    super(props)
+    super(props);
+
+    this.state = {
+      formatted: [],
+    };
   }
+
   render() {
-      return (
-          <div className="container">
-              <h2>Activity of the asset for last 3 months</h2>
-              <Chart
-                width={'100%'}
-                height={450}
-                chartType="CandlestickChart"
-                loader={<div>Loading Chart</div>}
-                data={data}
-                options={{
-                  legend: 'none',
-                }}
-                rootProps={{ 'data-testid': '1' }}
-              />             
-          </div>                  
-      )
+    return (
+      <div className="container">
+        {/* {this.formData()} */}
+        {/* {JSON.stringify(this.props.chartData)} */}
+        {this.props.isChartSpin ? (
+          <div
+            style={{
+              height: "450px",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Spinner />
+          </div>
+        ) : (
+          <Chart
+            width={"1000px"}
+            height={450}
+            chartType="CandlestickChart"
+            loader={<div>Loading Chart</div>}
+            data={this.props.chartData}
+            options={{
+              legend: "none",
+            }}
+            rootProps={{ "data-testid": "1" }}
+          />
+        )}
+      </div>
+    );
   }
 }
 export default GoogleChart;
