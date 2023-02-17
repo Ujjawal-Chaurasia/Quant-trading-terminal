@@ -17,7 +17,15 @@ class GoogleChart extends Component {
         {/* {this.formData()} */}
         {/* {JSON.stringify(this.props.chartData)} */}
         {this.props.isChartSpin ? (
-          <div style={{ height: "450px", width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+          <div
+            style={{
+              height: "450px",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Spinner />
           </div>
         ) : (

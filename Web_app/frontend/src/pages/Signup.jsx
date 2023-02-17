@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"
 import {
   MDBBtn,
   MDBContainer,
@@ -21,7 +22,7 @@ import {
 } from "mdb-react-ui-kit";
 
 function App() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -45,12 +46,22 @@ function App() {
         console.log(userCredential);
         const user = userCredential.user;
         // ...
-        navigate('/login')
+        navigate("/login");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(error);
+        toast.error(errorMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         // ..
       });
   };
@@ -65,8 +76,7 @@ function App() {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
-        navigate('/dashboard')
-
+        navigate("/dashboard");
       })
       .catch((error) => {
         // Handle Errors here.

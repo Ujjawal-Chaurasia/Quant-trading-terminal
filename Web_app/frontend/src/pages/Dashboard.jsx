@@ -7,6 +7,7 @@ import { fetchNews } from "../service/news-service";
 import { Spinner } from "../spinner";
 
 const Dashboard = () => {
+  const [searchItem, setSearchItem] = useState("");
   const [chartData, setChartData] = useState([]);
   const [metadata, setMetadata] = useState({
     symbol: "GOOGL",
@@ -48,6 +49,15 @@ const Dashboard = () => {
     return formattedData;
   };
 
+  const handleSearchChange = (e) => {
+    setSearchItem(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault()
+    fetchdata(searchItem)
+  }
+
   const getNews = async () => {
     const news = await fetchNews();
     setIsNewsSpin(false);
@@ -70,7 +80,7 @@ const Dashboard = () => {
           alignItems: "center",
         }}
       >
-        <form>
+        <form onSubmit={handleSearchSubmit}>
           <div className="searchandicon">
             <span className="input-group-text border-0" id="search-addon">
               <i
@@ -82,6 +92,7 @@ const Dashboard = () => {
               style={{
                 width: "800px",
               }}
+              onChange={handleSearchChange}
               type="search"
               className="form-control rounded"
               placeholder="Search for desired asset class"
@@ -121,7 +132,7 @@ const Dashboard = () => {
               </div>
             ) : (
               newsData.map((item) => (
-                <div className="news-container">
+                <div key={`NEWS_${item.title}`} className="news-container">
                   <p className="newsheading">{item.title}</p>
                   <p className="newscontent">{item.sourceName}</p>
                 </div>
