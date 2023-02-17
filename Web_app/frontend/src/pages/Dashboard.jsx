@@ -4,6 +4,7 @@ import GoogleChart from "../components/chart";
 import { useEffect } from "react";
 import { MDBBtn } from "mdb-react-ui-kit";
 import { fetchNews } from "../service/news-service";
+import { Spinner } from "../spinner";
 
 const Dashboard = () => {
   const [chartData, setChartData] = useState([]);
@@ -13,6 +14,8 @@ const Dashboard = () => {
     regularMarketPrice: 95.51,
   });
   const [newsData, setNewsData] = useState([]);
+  const [isChartSpin, setIsChartSpin] = useState(true);
+  const [isNewsSpin, setIsNewsSpin] = useState(true);
 
   const fetchdata = (symbol) => {
     fetch(
@@ -30,6 +33,7 @@ const Dashboard = () => {
 
         setMetadata(result.meta);
         setChartData(formatData(result.indicators.quote[0]));
+        setIsChartSpin(false);
       });
   };
 
@@ -46,6 +50,7 @@ const Dashboard = () => {
 
   const getNews = async () => {
     const news = await fetchNews();
+    setIsNewsSpin(false);
     setNewsData(news.slice(0, 4));
   };
 
@@ -100,21 +105,35 @@ const Dashboard = () => {
             <MDBBtn>Add to Portfolio</MDBBtn>
           </div>
           <p className="recentnews">Recent News</p>
+
           <div className="news">
-            {newsData.length > 0 &&
+            {isNewsSpin ? (
+              <div
+                style={{
+                  height: "300px",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Spinner />
+              </div>
+            ) : (
               newsData.map((item) => (
                 <div className="news-container">
                   <p className="newsheading">{item.title}</p>
                   <p className="newscontent">{item.sourceName}</p>
                 </div>
-              ))}
+              ))
+            )}
           </div>
         </div>
 
         <div className="chartandmetrics">
           <h3 className="pt-5 ps-3">Activity of the asset for last 3 months</h3>
 
-          <GoogleChart chartData={chartData} />
+          <GoogleChart chartData={chartData} isChartSpin={isChartSpin} />
 
           <div className="keymetrics">
             <h3 className="pt-2 ps-3">Key Metrics</h3>
