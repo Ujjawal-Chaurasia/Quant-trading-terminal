@@ -135,7 +135,7 @@ const Portfolio = () => {
                       </p>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: "10px" }}>
+                  {/* <div style={{ display: "flex", gap: "10px" }}>
                     <MDBDropdown>
                       <MDBDropdownToggle>Select Strategy</MDBDropdownToggle>
                       <MDBDropdownMenu>
@@ -147,7 +147,7 @@ const Portfolio = () => {
                     <MDBBtn className="me-1" color="secondary">
                       Get Price
                     </MDBBtn>
-                  </div>
+                  </div> */}
                 </>
               ))
             ) : (
