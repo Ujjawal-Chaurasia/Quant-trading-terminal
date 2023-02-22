@@ -1,6 +1,7 @@
 import * as firebase from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const app = firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
@@ -15,6 +16,9 @@ const app = firebase.initializeApp({
 
 // Initialize Firebase
 export default app;
+
+// Intialize Firestore
+export const db = getFirestore(app);
 
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);

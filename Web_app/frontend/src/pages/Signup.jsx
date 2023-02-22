@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  updateCurrentUser
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -43,7 +44,6 @@ function App() {
     createUserWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
         // Signed in
-        console.log(userCredential);
         const user = userCredential.user;
         // ...
         navigate("/login");

@@ -37,6 +37,14 @@ function App() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+
+        localStorage.setItem("uid", user.uid);
+        localStorage.setItem("token", user.accessToken);
+        // localStorage.setItem("user-info", {
+        //   name: user.displayName,
+        //   email: user.email,
+        // });
+
         navigate("/dashboard");
         // ...
       })
@@ -64,6 +72,13 @@ function App() {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
+ 
+        localStorage.setItem("uid", user.uid);
+        localStorage.setItem("token", user.accessToken);
+        // localStorage.setItem("user-info", {
+        //   name: user.displayName,
+        //   email: user.email,
+        // });
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         navigate("/dashboard");
