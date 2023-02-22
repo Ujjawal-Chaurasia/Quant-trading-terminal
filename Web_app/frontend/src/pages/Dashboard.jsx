@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import "../styles/Dashboard.css";
 import GoogleChart from "../components/chart";
 import { useEffect } from "react";
-import { MDBBtn } from "mdb-react-ui-kit";
+import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 import { fetchNews } from "../service/news-service";
+import { addStockToPortfolio } from "../service/portfolio-service";
+import { Link } from "react-router-dom"
+
 import { Spinner } from "../spinner";
 
 const Dashboard = () => {
@@ -54,9 +57,9 @@ const Dashboard = () => {
   };
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault()
-    fetchdata(searchItem)
-  }
+    e.preventDefault();
+    fetchdata(searchItem);
+  };
 
   const getNews = async () => {
     const news = await fetchNews();
@@ -97,6 +100,19 @@ const Dashboard = () => {
               className="form-control rounded"
               placeholder="Search for desired asset class"
             />
+            <Link to="/portfolio">
+              <MDBIcon
+                style={{
+                  color: "white",
+                  position: "relative",
+                  top: "10px",
+                  left: "5px",
+                }}
+                size="lg"
+                fas
+                icon="user-circle"
+              />
+            </Link>
           </div>
         </form>
       </nav>
@@ -113,7 +129,9 @@ const Dashboard = () => {
                 %
               </p>
             </div>
-            <MDBBtn>Add to Portfolio</MDBBtn>
+            <MDBBtn onClick={() => addStockToPortfolio(metadata.symbol)}>
+              Add to Portfolio
+            </MDBBtn>
           </div>
           <p className="recentnews">Recent News</p>
 

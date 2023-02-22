@@ -1,0 +1,109 @@
+nav {
+  /* width: 100vw; */
+  height: 15vh;
+  align-items: center;
+  background-color: #0098fb;
+}
+.searchandicon {
+  display: flex;
+  gap: 10px;
+}
+
+.data {
+  background-color: black;
+  border-radius: 1rem;
+  width: 80%;
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+}
+.data p {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  margin-left: 2rem;
+}
+.assetname {
+  font-weight: 1000;
+  font-size: 2.5rem;
+}
+.price {
+  font-size: 2rem;
+}
+.change {
+  color: green;
+  font-size: 2rem;
+}
+.priceandchange {
+  display: flex;
+}
+.recentnews {
+  margin-top: 30px;
+  font-size: 1.6rem;
+}
+.news {
+  min-height: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.news-container {
+  background-color: #d6e7fa;
+  border-radius: 8px;
+  padding: 20px;
+}
+.newsheading {
+  font-weight: 700;
+}
+.newscontent {
+  text-decoration: underline;
+}
+.content {
+  display: flex;
+}
+.dataandnews {
+  width: 40vw;
+  padding: 3rem;
+  display: block;
+}
+
+.chartandmetrics {
+  width: 100%;
+}
+.portfolio-stocks {
+  width: 100%;
+}
+
+.portfolio {
+  padding: 8rem;
+}
+
+.metrics {
+  display: flex;
+  padding: 25px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.metrics-block {
+  padding: 40px;
+  background-color: white-smoke;
+  border: 1px solid rgba(0, 0, 0, 0.27);
+  border-radius: 8px;
+}
+.metrics-block h4 {
+  font-weight: 300;
+}
+.stocks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.no-stock {
+  height: 40vh;
+}
+.no-stock-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

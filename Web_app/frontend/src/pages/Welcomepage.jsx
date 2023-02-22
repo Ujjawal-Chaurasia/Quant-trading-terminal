@@ -11,7 +11,7 @@ const Welcomepage = () => {
         </div>
 
         <div className="mt-4" id="links">
-          <Link>
+          <Link to="/dashboard">
             <h4 style={{ color: "white", fontWeight: 700 }}>Home</h4>
           </Link>
 
