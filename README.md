@@ -1,4 +1,4 @@
-Sure, here is the updated README for `Quant-trading-terminal`:
+
 
 # Quant Trading Terminal
 
